@@ -25,7 +25,7 @@ void i2c_se_init(void)
   //------------------------------------------------------
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_se_SCL|I2C_se_SDA, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL|I2C_SE_SDA, GPIO_PIN_SET);
 
   /*Configure GPIO pins : SCL_Pin SDA_Pin */
   GPIO_InitStruct.Pin = I2C_SE_SCL | I2C_SE_SDA;
@@ -125,22 +125,22 @@ void i2c_se_send_data(uint8_t data)
     //-----------------------
     i2c_se_delay(1);
 
-    HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_SET);
     i2c_se_delay(2);
 
-    HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
     i2c_se_delay(1);
     //-----------------------
   }
 
   // ACK
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SDA, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SDA, GPIO_PIN_SET);
   i2c_se_delay(1);
 
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_SET);
   i2c_se_delay(2);
 
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
   i2c_se_delay(1);
   //-----------------------
 }
@@ -164,10 +164,10 @@ void i2c_se_send_data_wack(uint8_t data)   //send data without ack
     //-----------------------
     i2c_se_delay(1);
 
-    HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_SET);
     i2c_se_delay(2);
 
-    HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
     i2c_se_delay(1);
     //-----------------------
   }
@@ -176,13 +176,13 @@ void i2c_se_send_data_wack(uint8_t data)   //send data without ack
 void i2c_se_send_ack()                            //send ack
 {
   // ACK
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SDA, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SDA, GPIO_PIN_SET);
   i2c_se_delay(1);
 
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_SET);
   i2c_se_delay(2);
 
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
   i2c_se_delay(1);
   //-----------------------
 }
@@ -194,18 +194,18 @@ uint8_t i2c_se_read_data(void)
   uint8_t data = 0;
   uint8_t r = 0x80;
 
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SDA, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SDA, GPIO_PIN_SET);
 
   for(i = 0; i < 8; i++)
   {
     //-----------------------
     i2c_se_delay(1);
 
-    HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_SET);
     i2c_se_delay(1);
     //-----------------------
     // DATA
-    b = HAL_GPIO_ReadPin(I2C_se_PORT, I2C_SE_SDA);
+    b = HAL_GPIO_ReadPin(I2C_SE_PORT, I2C_SE_SDA);
 
     if(b != 0) data = data | r;
 
@@ -213,22 +213,22 @@ uint8_t i2c_se_read_data(void)
     i2c_se_delay(1);
     //-----------------------
 
-    HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
     i2c_se_delay(1);
     //-----------------------
   }
 
   // ACK
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SDA, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SDA, GPIO_PIN_RESET);
   i2c_se_delay(1);
 
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_SET);
   i2c_se_delay(2);
 
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
   i2c_se_delay(1);
 
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SDA, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SDA, GPIO_PIN_SET);
   //-----------------------
 
   return data;
@@ -241,18 +241,18 @@ uint8_t i2c_se_read_data_wack(void)
   uint8_t data = 0;
   uint8_t r = 0x80;
 
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SDA, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SDA, GPIO_PIN_SET);
 
   for(i = 0; i < 8; i++)
   {
     //-----------------------
     i2c_se_delay(1);
 
-    HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_SET);
     i2c_se_delay(1);
     //-----------------------
     // DATA
-    b = HAL_GPIO_ReadPin(I2C_se_PORT, I2C_SE_SDA);
+    b = HAL_GPIO_ReadPin(I2C_SE_PORT, I2C_SE_SDA);
 
     if(b != 0) data = data | r;
 
@@ -260,20 +260,20 @@ uint8_t i2c_se_read_data_wack(void)
     i2c_se_delay(1);
     //-----------------------
 
-    HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
     i2c_se_delay(1);
     //-----------------------
   }
 
   //WITHOUT ACK
 
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SDA, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SDA, GPIO_PIN_SET);
   i2c_se_delay(1);
 
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_SET);
   i2c_se_delay(2);
 
-  HAL_GPIO_WritePin(I2C_se_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(I2C_SE_PORT, I2C_SE_SCL, GPIO_PIN_RESET);
   i2c_se_delay(1);
 
   //-----------------------
